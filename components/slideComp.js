@@ -15,6 +15,7 @@ class Slide extends HTMLElement {
               </div>
         <div class="slide__gradient"></div>
         `;
+    // this.addEventListener('click', () => console.log('click'))
   }
 
   set content(value) {
