@@ -1,7 +1,6 @@
 import getData from "../tools/getData.js";
 import storage from "../tools/Storage.js";
 
-
 class Slides extends HTMLElement {
   constructor() {
     super();
@@ -9,39 +8,43 @@ class Slides extends HTMLElement {
     const template = document.createElement("template");
     shadowRoot.appendChild(template.content.cloneNode(true));
     shadowRoot.innerHTML = `<link rel="stylesheet" href="/styles/style.css">`;
-      this.wrapper = document.querySelector(".wrapper");
-    }
-    
-    connectedCallback() {
-        getData().then((data) =>
-        data.forEach((element) => {
-            const slideComp = document.createElement("slide-comp");
-            slideComp.setAttribute('class', 'slide')
-          slideComp.content = element;
-          this.shadowRoot.appendChild(slideComp)
-          slideComp.addEventListener('click', () => this.addComponents(slideComp.content))
-      })
-      );
+    this.wrapper = document.querySelector(".wrapper");
   }
+
+  connectedCallback() {
+    this.setAttribute("class", "slides");
+    getData().then((data) =>
+      data.forEach((element) => {
+        const slideComp = document.createElement("slide-comp");
+        slideComp.setAttribute("class", "slide");
+        slideComp.content = element;
+        this.shadowRoot.appendChild(slideComp);
+        slideComp.addEventListener("click", () =>
+          this.addComponents(slideComp.content)
+        );
+      })
+    );
+    if (this.isStorageEmpty()) return;
+    this.addComponents(storage.getItemStorage());
+  }
+  
   addComponents(value) {
     storage.setStorage(value);
     this.createCartComp(value);
     this.createFooterComp(value);
-    this.removeSlidesComp();  
+    this.removeSlidesComp();
   }
-  
+
   createCartComp(value) {
-    const cartComp = document.createElement('cart-comp');
+    const cartComp = document.createElement("cart-comp");
     cartComp.content = value;
-    this.wrapper.appendChild(cartComp)
-    
+    this.wrapper.appendChild(cartComp);
   }
 
   createFooterComp(value) {
-    const footerComp = document.createElement('footer-comp');
+    const footerComp = document.createElement("footer-comp");
     footerComp.content = value;
-    this.wrapper.appendChild(footerComp)
-    
+    this.wrapper.appendChild(footerComp);
   }
 
   removeSlidesComp() {
@@ -51,6 +54,9 @@ class Slides extends HTMLElement {
     }
   }
 
+  isStorageEmpty() {
+    return storage.getItemStorage() ? false : true;
+  }
 }
 
 window.customElements.define("slides-comp", Slides);
