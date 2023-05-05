@@ -19,15 +19,37 @@ class Slides extends HTMLElement {
             slideComp.setAttribute('class', 'slide')
           slideComp.content = element;
           this.shadowRoot.appendChild(slideComp)
-          slideComp.addEventListener('click', () => this.createComponents(slideComp.content))
+          slideComp.addEventListener('click', () => this.addComponents(slideComp.content))
       })
       );
   }
-  createComponents(value) {
+  addComponents(value) {
     storage.setStorage(value);
-    console.log(value);
-     
-   }
+    this.createCartComp(value);
+    this.createFooterComp(value);
+    this.removeSlidesComp();  
+  }
+  
+  createCartComp(value) {
+    const cartComp = document.createElement('cart-comp');
+    cartComp.content = value;
+    this.wrapper.appendChild(cartComp)
+    
+  }
+
+  createFooterComp(value) {
+    const footerComp = document.createElement('footer-comp');
+    footerComp.content = value;
+    this.wrapper.appendChild(footerComp)
+    
+  }
+
+  removeSlidesComp() {
+    const main = document.querySelector("main");
+    while (main.firstChild) {
+      main.removeChild(main.firstChild);
+    }
+  }
 
 }
 
