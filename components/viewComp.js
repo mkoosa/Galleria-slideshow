@@ -15,7 +15,7 @@ class View extends HTMLElement {
             </div>
             `;
     this.addEventListener("click", () =>
-      this.showView(document.querySelector("cart-comp")._content)
+      this.showView(document.querySelector("cart-comp").content)
     );
   }
 

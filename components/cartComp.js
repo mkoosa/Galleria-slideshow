@@ -10,6 +10,10 @@ class Cart extends HTMLElement {
     this._content = value;
   }
 
+  get content() {
+    return this._content
+  }
+
   connectedCallback() {
     this.shadowRoot.innerHTML = `
     <link rel="stylesheet" href="/styles/style.css">
