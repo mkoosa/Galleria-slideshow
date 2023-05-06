@@ -24,7 +24,7 @@ class Cart extends HTMLElement {
        <source class="image-large" media="(min-width:768px)" srcset=${this._content.images.hero.large}>
        <img class="image-medium" alt="" srcset=${this._content.images.hero.small}>
      </picture>
-    <view-comp name="${this._content.name}"></view-comp>
+    <view-comp></view-comp>
      </div>
      <div class="picture__content">
      <div class="picture__details">
@@ -44,6 +44,18 @@ class Cart extends HTMLElement {
       const galleriaLogo = document.querySelector('header-comp').shadowRoot.querySelector('.header__logo'); 
       this.changeStye(galleriaLogo);
     }, 20)
+  }
+
+  render() {
+    this.shadowRoot.querySelector('.image-large').setAttribute('srcset', this._content.images.hero.large)
+    this.shadowRoot.querySelector('.image-medium').setAttribute('srcset', this._content.images.hero.small)
+    this.shadowRoot.querySelector('.picture__name').textContent = this._content.name;
+    this.shadowRoot.querySelector('.picture__painter').textContent = this._content.artist.name;
+    this.shadowRoot.querySelector('.picture__img--smallest').setAttribute('src', this._content.artist.image)
+    this.shadowRoot.querySelector('.description__year').textContent = this._content.year;
+    this.shadowRoot.querySelector('.description__paragraph').textContent = this._content.description;
+    this.shadowRoot.querySelector('.source').setAttribute('href', this._content.source);
+    
   }
   
   changeStye(element) {
