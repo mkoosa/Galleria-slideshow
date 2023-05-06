@@ -43,21 +43,22 @@ class Nav extends HTMLElement {
     this.index--;
     if (this.index < 0) {
       this.index = 0;
-      this.renderCartComp(this.index);
-      this.renderFooterComp(this.index);
+      this.renderComponents();
       return;
     }
-    this.renderCartComp(this.index);
-    this.renderFooterComp(this.index);
+    this.renderComponents();
   }
   nextSlide() {
     this.index++;
     if (this.index === this.valuesLength) {
       this.index = 0;
-      this.renderCartComp(this.index);
-      this.renderFooterComp(this.index);
+      this.renderComponents();
       return;
     }
+    this.renderComponents();
+  }
+
+  renderComponents() {
     this.renderCartComp(this.index);
     this.renderFooterComp(this.index);
   }
