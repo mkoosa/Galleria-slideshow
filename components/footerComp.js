@@ -10,6 +10,10 @@ class Footer extends HTMLElement {
     this._content = value;
   }
 
+  get content() {
+    return this._content;
+  }
+
   connectedCallback() {
     this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="/styles/style.css">
@@ -20,12 +24,17 @@ class Footer extends HTMLElement {
         <p class="footer__painter">${this._content.artist.name}</p>
         </div>
         <div class="footer__right d-row">
-        <img class="back" src="/assets//shared/icon-back-button.svg" alt="back" tabindex="0">
-        <img class="forward" src="/assets//shared/icon-next-button.svg" alt="forward" tabindex="0">
+        <nav-comp></nav-comp>
         </div>
         </div>
         </footer>
         `;
+  }
+
+  render() {
+    this.shadowRoot.querySelector('.footer__painting').textContent = this._content.name;
+    this.shadowRoot.querySelector('.footer__painter').textContent = this._content.artist.name;
+    
   }
 }
 
