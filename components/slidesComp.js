@@ -27,7 +27,7 @@ class Slides extends HTMLElement {
     if (this.isStorageEmpty()) return;
     this.addComponents(storage.getItemStorage());
   }
-  
+
   addComponents(value) {
     storage.setStorage(value);
     this.createCartComp(value);
@@ -35,7 +35,8 @@ class Slides extends HTMLElement {
     this.removeSlidesComp();
   }
 
-  createCartComp(value) {
+  createCartComp(value ) {
+    
     const cartComp = document.createElement("cart-comp");
     cartComp.content = value;
     this.wrapper.appendChild(cartComp);
