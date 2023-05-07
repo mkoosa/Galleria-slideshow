@@ -13,7 +13,8 @@ class Header extends HTMLElement {
     this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="/styles/style.css">
             <img class="header__logo" src="/assets/shared/logo.svg" alt="logo">
-            <p class="header__paragraph header__paragraph--start-stop" tabindex="0">start slideshow</p>
+            <slideshow-comp></slideshow-comp>
+            
             `;
 
     const galleria = this.shadowRoot.querySelector(".header__logo");
@@ -23,10 +24,10 @@ class Header extends HTMLElement {
   backToGalleria(galleria) {
     storage.clearStorage();
     document.querySelector("cart-comp")
-      ? this.displayGalleria(galleria)
-      : this.notDisplayGalleria(galleria);
+    ? this.displayGalleria(galleria)
+    : this.notDisplayGalleria(galleria);
   }
-
+  
   displayGalleria(galleria) {
     this.removeComponents();
     const main = document.querySelector("main");
@@ -36,9 +37,9 @@ class Header extends HTMLElement {
   }
 
   changeStye(element) {
+    
     element.style.opacity = .2;
     element.style.cursor = 'initial';
-    
   }
 
   notDisplayGalleria(galleria) {

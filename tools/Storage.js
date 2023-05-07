@@ -3,7 +3,7 @@ const KEY = "masterpiece"
 class Storage {
     constructor(key) {
       this.key = key
-    this.storage = localStorage;
+    this.storage = sessionStorage;
   }
 
   setStorage(value) {
