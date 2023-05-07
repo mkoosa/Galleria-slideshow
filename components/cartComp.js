@@ -1,3 +1,4 @@
+import { getIndex } from "../tools/index.js";
 class Cart extends HTMLElement {
   constructor() {
     super();
@@ -11,7 +12,7 @@ class Cart extends HTMLElement {
   }
 
   get content() {
-    return this._content
+    return this._content;
   }
 
   connectedCallback() {
@@ -41,28 +42,41 @@ class Cart extends HTMLElement {
     </div>
     </section>`;
     setTimeout(() => {
-      const galleriaLogo = document.querySelector('header-comp').shadowRoot.querySelector('.header__logo'); 
+      const galleriaLogo = document
+        .querySelector("header-comp")
+        .shadowRoot.querySelector(".header__logo");
       this.changeStye(galleriaLogo);
-    }, 20)
+    }, 20);
   }
 
   render() {
-    this.shadowRoot.querySelector('.image-large').setAttribute('srcset', this._content.images.hero.large)
-    this.shadowRoot.querySelector('.image-medium').setAttribute('srcset', this._content.images.hero.small)
-    this.shadowRoot.querySelector('.picture__name').textContent = this._content.name;
-    this.shadowRoot.querySelector('.picture__painter').textContent = this._content.artist.name;
-    this.shadowRoot.querySelector('.picture__img--smallest').setAttribute('src', this._content.artist.image)
-    this.shadowRoot.querySelector('.description__year').textContent = this._content.year;
-    this.shadowRoot.querySelector('.description__paragraph').textContent = this._content.description;
-    this.shadowRoot.querySelector('.source').setAttribute('href', this._content.source);
-    
-  }
-  
-  changeStye(element) {
-    element.style.opacity = .8;
-    element.style.cursor = 'pointer';
+    if(!this.content) return
+    this.shadowRoot
+      .querySelector(".image-large")
+      .setAttribute("srcset", this._content.images.hero.large);
+    this.shadowRoot
+      .querySelector(".image-medium")
+      .setAttribute("srcset", this._content.images.hero.small);
+    this.shadowRoot.querySelector(".picture__name").textContent =
+      this._content.name;
+    this.shadowRoot.querySelector(".picture__painter").textContent =
+      this._content.artist.name;
+    this.shadowRoot
+      .querySelector(".picture__img--smallest")
+      .setAttribute("src", this._content.artist.image);
+    this.shadowRoot.querySelector(".description__year").textContent =
+      this._content.year;
+    this.shadowRoot.querySelector(".description__paragraph").textContent =
+      this._content.description;
+    this.shadowRoot
+      .querySelector(".source")
+      .setAttribute("href", this._content.source);
   }
 
+  changeStye(element) {
+    element.style.opacity = 0.8;
+    element.style.cursor = "pointer";
+  }
 }
 
 window.customElements.define("cart-comp", Cart);
