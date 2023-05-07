@@ -1,4 +1,4 @@
-import getData from "../tools/getData.js";
+import {getData, getIndex} from "../tools/index.js";
 import storage from "../tools/Storage.js";
 
 class Nav extends HTMLElement {
@@ -40,8 +40,9 @@ class Nav extends HTMLElement {
   }
 
   previousSlide() {
+    this.index = getIndex();
     this.index--;
-    if (this.index < 0) {
+    if (this.index < 1) {
       this.index = 0;
       this.renderComponents();
       return;
@@ -49,7 +50,9 @@ class Nav extends HTMLElement {
     this.renderComponents();
   }
   nextSlide() {
+    this.index = getIndex();
     this.index++;
+    console.log(this.index);
     if (this.index === this.valuesLength) {
       this.index = 0;
       this.renderComponents();
@@ -66,8 +69,8 @@ class Nav extends HTMLElement {
   renderCartComp(index) {
     const cartComp = document.querySelector("cart-comp");
     cartComp.content = this.data[index];
-    storage.setStorage(cartComp.content);
     cartComp.render();
+    storage.setStorage(cartComp.content);
   }
   renderFooterComp(index) {
     const footerComp = document.querySelector("footer-comp");
@@ -78,9 +81,7 @@ class Nav extends HTMLElement {
   setCartInitialValues(values) {
     this.data = values;
     this.valuesLength = values.length;
-    values.filter((item, index) => {
-      if (item.name === this.getAttribute("name")) this.index = index;
-    });
+    this.index = getIndex();
   }
 }
 
