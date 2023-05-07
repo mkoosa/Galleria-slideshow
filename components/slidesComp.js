@@ -1,4 +1,4 @@
-import getData from "../tools/getData.js";
+import {getData} from "../tools/index.js";
 import storage from "../tools/Storage.js";
 
 class Slides extends HTMLElement {
@@ -9,6 +9,7 @@ class Slides extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
     shadowRoot.innerHTML = `<link rel="stylesheet" href="/styles/style.css">`;
     this.wrapper = document.querySelector(".wrapper");
+
   }
 
   connectedCallback() {
@@ -27,6 +28,24 @@ class Slides extends HTMLElement {
     if (this.isStorageEmpty()) return;
     this.addComponents(storage.getItemStorage());
   }
+
+  render() {
+    console.log('ok');
+    this.setAttribute("class", "slides");
+    getData().then((data) =>
+      data.forEach((element) => {
+        const slideComp = document.createElement("slide-comp");
+        slideComp.setAttribute("class", "slide");
+        slideComp.content = element;
+        slideComp.render();
+        slideComp.content = element;
+        this.shadowRoot.appendChild(slideComp);
+        slideComp.addEventListener("click", () =>
+          this.addComponents(slideComp.content)
+        );
+      })
+    );
+  }  
 
   addComponents(value) {
     storage.setStorage(value);
@@ -53,6 +72,7 @@ class Slides extends HTMLElement {
     while (main.firstChild) {
       main.removeChild(main.firstChild);
     }
+    // main.remove()
   }
 
   isStorageEmpty() {
