@@ -32,9 +32,9 @@ class Footer extends HTMLElement {
   }
 
   render() {
+    if(!this.content) return
     this.shadowRoot.querySelector('.footer__painting').textContent = this._content.name;
     this.shadowRoot.querySelector('.footer__painter').textContent = this._content.artist.name;
-    
   }
 }
 
