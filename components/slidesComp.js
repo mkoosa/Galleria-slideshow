@@ -39,20 +39,26 @@ class Slides extends HTMLElement {
         slideComp.content = element;
         this.shadowRoot.appendChild(slideComp);
         slideComp.addEventListener("click", () =>
-          this.addComponents(slideComp.content)
+        this.addComponents(slideComp.content)
         );
       })
-    );
-  }  
-
-  addComponents(value) {
+      );
+    }  
+    
+    pressEnter(e) {
+      if (e.key === 'Enter') {
+        this.addComponents(e.target.content)
+      }
+    }
+    
+    addComponents(value) {
     storage.setStorage(value);
     this.createCartComp(value);
     this.createFooterComp(value);
     this.removeSlidesComp();
   }
 
-  createCartComp(value ) {    
+  createCartComp(value) {    
     const cartComp = document.createElement("cart-comp");
     cartComp.content = value;
     this.wrapper.appendChild(cartComp);
@@ -75,5 +81,7 @@ class Slides extends HTMLElement {
     return storage.getItemStorage() ? false : true;
   }
 }
+
+
 
 window.customElements.define("slides-comp", Slides);
