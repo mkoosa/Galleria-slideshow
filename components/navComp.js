@@ -56,11 +56,17 @@ class Nav extends HTMLElement {
   addListener(back, forward) {
     back.addEventListener("click", () => this.previousSlide());
     forward.addEventListener("click", () => this.nextSlide());
+    back.addEventListener("keypress", (e) => this.pressEnterAndBack(e));
+    forward.addEventListener("keypress", (e) => this.pressEnterAndForward(e));
   }
 
   removeLIstener(back, forward) {
     back.removeEventListener("click", () => this.previousSlide());
     forward.removeEventListener("click", () => this.nextSlide());
+    back.removeEventListener("keypress", (e) => this.pressEnterAndBack(e));
+    forward.removeEventListener("keypress", (e) =>
+      this.pressEnterAndForward(e)
+    );
   }
 
   previousSlide() {
@@ -83,6 +89,18 @@ class Nav extends HTMLElement {
       return;
     }
     this.renderComponents();
+  }
+
+  pressEnterAndBack(e) {
+    if (e.key === "Enter") {
+      this.previousSlide();
+    }
+  }
+
+  pressEnterAndForward(e) {
+    if (e.key === "Enter") {
+      this.nextSlide();
+    }
   }
 
   renderComponents() {
