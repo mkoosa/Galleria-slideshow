@@ -4,6 +4,17 @@ class View extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     const template = document.createElement("template");
     shadowRoot.appendChild(template.content.cloneNode(true));
+    this.wrapper = document.querySelector(".wrapper");
+    this._animation = true;
+    this._stop = false;
+  }
+
+  set animation(value) {
+    this._animation = value;
+  }
+
+  set stop(value) {
+    this._stop = value;
   }
 
   connectedCallback() {
@@ -14,7 +25,31 @@ class View extends HTMLElement {
             <p class="view-paragraph">view image</p>
             </div>
             `;
-    this.addEventListener("click", () =>
+
+    this.pictureView = this.shadowRoot.querySelector(".picture__view");
+    this.setListener(this.pictureView);
+    this.setAttribute('name', this._animation);
+  }
+
+  setListener(element) {
+    (this._animation &&
+      !this._stop &&
+      !this.wrapper.classList.contains("active")) ||
+    (this._animation &&
+      !this._stop &&
+      this.wrapper.classList.contains("active"))
+      ? this.addListener(element)
+      : this.removeListener(element);
+  }
+
+  addListener(element) {
+    element.addEventListener("click", () =>
+      this.showView(document.querySelector("cart-comp").content)
+    );
+  }
+
+  removeListener(element) {
+    element.removeEventListener("click", () =>
       this.showView(document.querySelector("cart-comp").content)
     );
   }
