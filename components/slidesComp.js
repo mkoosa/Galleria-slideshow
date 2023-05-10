@@ -9,7 +9,6 @@ class Slides extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
     shadowRoot.innerHTML = `<link rel="stylesheet" href="/styles/style.css">`;
     this.wrapper = document.querySelector(".wrapper");
-
   }
 
   connectedCallback() {
@@ -30,7 +29,6 @@ class Slides extends HTMLElement {
   }
 
   render() {
-    console.log('ok');
     this.setAttribute("class", "slides");
     getData().then((data) =>
       data.forEach((element) => {
@@ -54,8 +52,7 @@ class Slides extends HTMLElement {
     this.removeSlidesComp();
   }
 
-  createCartComp(value ) {
-    
+  createCartComp(value ) {    
     const cartComp = document.createElement("cart-comp");
     cartComp.content = value;
     this.wrapper.appendChild(cartComp);
@@ -71,8 +68,7 @@ class Slides extends HTMLElement {
     const main = document.querySelector("main");
     while (main.firstChild) {
       main.removeChild(main.firstChild);
-    }
-    // main.remove()
+    };
   }
 
   isStorageEmpty() {

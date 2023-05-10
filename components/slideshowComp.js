@@ -11,6 +11,7 @@ class Slideshow extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
     this.start = false;
     this._content = START;
+    this.wrapper = document.querySelector('.wrapper');
   }
 
   set content(value) {
@@ -26,8 +27,6 @@ class Slideshow extends HTMLElement {
                 <link rel="stylesheet" href="/styles/style.css">
                 <p class="header__paragraph header__paragraph--start-stop" tabindex="0">${this._content}</p>
                 `;
-
-    const galleria = this.shadowRoot.querySelector(".header__logo");
     this.addEventListener("click", () => {
       !this.start ? this.startShow() : this.stopShow();
       this.render();
@@ -41,11 +40,36 @@ class Slideshow extends HTMLElement {
   }
 
   startShow() {
+    
+    this.wrapper.classList.add('active')
+    setTimeout(() => {
+      this.footerComp = document.querySelector("footer-comp");
+      this.viewComp = document.querySelector("cart-comp").shadowRoot.querySelector('view-comp');
+      this.navComp = this.footerComp.shadowRoot.querySelector('nav-comp');
+      this.navComp.animation = false;
+      this.navComp.stop = true;
+      this.viewComp.animation = false;
+      this.viewComp.stop = true;
+      this.navComp.connectedCallback();
+      this.viewComp.connectedCallback();
+    }, 200);
     this.start = !this.start;
     this.matchContent(STOP);
     getData().then((data) =>
-      this.setAnimationStart(data, document.querySelector("slides-comp"))
+    this.setAnimationStart(data, document.querySelector("slides-comp"))
     );
+  }
+  
+  stopShow() {
+    this.start = !this.start;
+    this.navComp.animation = true;
+    this.navComp.stop = false;
+    this.viewComp.animation = true;
+    this.viewComp.stop = false;
+    this.viewComp.connectedCallback();
+    this.navComp.connectedCallback();
+    this.matchContent(START);
+    clearInterval(this.interval);
   }
 
   setAnimationStart(value, comp) {
@@ -68,16 +92,19 @@ class Slideshow extends HTMLElement {
   }
 
   animationEngine(value) {
+    storage.clearStorage();
+    this.footerComp = document.querySelector("footer-comp");
+    this.navComp = this.footerComp.shadowRoot.querySelector('nav-comp');
+    const cartComp = document.querySelector("cart-comp");
+    this.navComp.animation = true;
     this.interval = setInterval(() => {
-      const cartComp = document.querySelector("cart-comp");
       this.index++;
       this.prepareComponent(cartComp, value)  
       storage.setStorage(cartComp.content);
-      const footerComp = document.querySelector("footer-comp");
-      this.prepareComponent(footerComp, value)  
-      if (this.index == 14) this.backToSlidesComp(cartComp, footerComp);
+      this.prepareComponent(this.footerComp, value);
+      if (this.index == 14) this.backToSlidesComp(cartComp, this.footerComp);
       return;
-    }, 500);
+    }, 2000);
   }
   
   prepareComponent(component, value) {
@@ -87,28 +114,24 @@ class Slideshow extends HTMLElement {
 
   backToSlidesComp() {
     setTimeout(() => {
+      this.wrapper.classList.remove('active')
       this.matchContent(START);
       clearInterval(this.interval);
       const headerComp = document.querySelector("header-comp");  
       const galleria = headerComp.shadowRoot.querySelector(".header__logo");
       headerComp.backToGalleria(galleria);
+      this.start = !this.start;
+      this.matchContent(START);
       return;
-    }, 500);
+    }, 2000);
   }
   
   matchContent(value) {
     this.content = value;
     this.render();
   }
-  
-  stopShow() {
-    console.log('stop');
-    this.start = !this.start;
-    this.matchContent(START);
-    clearInterval(this.interval);
-  }
 
-  finishShow(index, cartComp, value) {
+  finishShow(cartComp, value) {
     clearInterval(this.interval);
     cartComp.content = value[0];
     cartComp.render(cartComp, this.content);

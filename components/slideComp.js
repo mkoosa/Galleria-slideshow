@@ -24,9 +24,7 @@ class Slide extends HTMLElement {
     </div>
     <div class="slide__gradient"></div>
     `;
-
   }
-
 }
 
 window.customElements.define("slide-comp", Slide);
