@@ -14,7 +14,6 @@ class Header extends HTMLElement {
             <link rel="stylesheet" href="/styles/style.css">
             <img class="header__logo" src="/assets/shared/logo.svg" alt="logo">
             <slideshow-comp></slideshow-comp>
-            
             `;
 
     const galleria = this.shadowRoot.querySelector(".header__logo");
@@ -25,7 +24,7 @@ class Header extends HTMLElement {
     storage.clearStorage();
     document.querySelector("cart-comp")
     ? this.displayGalleria(galleria)
-    : this.notDisplayGalleria(galleria);
+    : this.noDisplayGalleria(galleria);
   }
   
   displayGalleria(galleria) {
@@ -37,12 +36,11 @@ class Header extends HTMLElement {
   }
 
   changeStye(element) {
-    
     element.style.opacity = .2;
     element.style.cursor = 'initial';
   }
 
-  notDisplayGalleria(galleria) {
+  noDisplayGalleria(galleria) {
     galleria.removeEventListener("click", () => this.backToGalleria(galleria));
   }
 

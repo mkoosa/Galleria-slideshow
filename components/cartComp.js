@@ -50,7 +50,7 @@ class Cart extends HTMLElement {
   }
 
   render() {
-    if(!this.content) return
+    if (!this.content) return;
     this.shadowRoot
       .querySelector(".image-large")
       .setAttribute("srcset", this._content.images.hero.large);

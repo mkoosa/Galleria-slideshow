@@ -1,13 +1,12 @@
-import {getData, getIndex} from "../tools/index.js";
+import { getData, getIndex } from "../tools/index.js";
 import storage from "../tools/Storage.js";
 
 class Nav extends HTMLElement {
-  static get observedAttributes() {
-    return ["name"];
-  }
-
   constructor() {
     super();
+    this.wrapper = document.querySelector(".wrapper");
+    this._animation = true;
+    this._stop = false;
     const shadowRoot = this.attachShadow({ mode: "open" });
     const template = document.createElement("template");
     shadowRoot.appendChild(template.content.cloneNode(true));
@@ -16,27 +15,52 @@ class Nav extends HTMLElement {
       document.querySelector("footer-comp").content.name
     );
     getData().then((data) => this.setCartInitialValues(data));
+    this.cartComp = document.querySelector("cart-comp");
+    this.viewComp = this.cartComp.shadowRoot.querySelector("view-comp");
+  }
+
+  set animation(value) {
+    this._animation = value;
+  }
+
+  set stop(value) {
+    this._stop = value;
   }
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/styles/style.css">
-            <div class="footer__right d-row">
-            <img class="back" src="/assets//shared/icon-back-button.svg" alt="back" tabindex="0">
-            <img class="forward" src="/assets//shared/icon-next-button.svg" alt="forward" tabindex="0">
-            </div
-            `;
+    <link rel="stylesheet" href="/styles/style.css">
+    <div class="footer__right d-row">
+    <img class="back" src="/assets//shared/icon-back-button.svg" alt="back" tabindex="0">
+    <img class="forward" src="/assets//shared/icon-next-button.svg" alt="forward" tabindex="0">
+    </div
+    `;
 
-    this.shadowRoot
-      .querySelector(".back")
-      .addEventListener("click", () => this.previousSlide());
-    this.shadowRoot
-      .querySelector(".forward")
-      .addEventListener("click", () => this.nextSlide());
+    this.targetAnimation(
+      this.shadowRoot.querySelector(".back"),
+      this.shadowRoot.querySelector(".forward")
+    );
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
-    console.log(name, oldVal, newVal);
+  targetAnimation(back, forward) {
+    (this._animation &&
+      !this._stop &&
+      !this.wrapper.classList.contains("active")) ||
+    (this._animation &&
+      !this._stop &&
+      this.wrapper.classList.contains("active"))
+      ? this.addListener(back, forward)
+      : this.removeLIstener(back, forward);
+  }
+
+  addListener(back, forward) {
+    back.addEventListener("click", () => this.previousSlide());
+    forward.addEventListener("click", () => this.nextSlide());
+  }
+
+  removeLIstener(back, forward) {
+    back.removeEventListener("click", () => this.previousSlide());
+    forward.removeEventListener("click", () => this.nextSlide());
   }
 
   previousSlide() {
@@ -49,10 +73,10 @@ class Nav extends HTMLElement {
     }
     this.renderComponents();
   }
+
   nextSlide() {
     this.index = getIndex();
     this.index++;
-    console.log(this.index);
     if (this.index === this.valuesLength) {
       this.index = 0;
       this.renderComponents();
@@ -67,10 +91,9 @@ class Nav extends HTMLElement {
   }
 
   renderCartComp(index) {
-    const cartComp = document.querySelector("cart-comp");
-    cartComp.content = this.data[index];
-    cartComp.render();
-    storage.setStorage(cartComp.content);
+    this.cartComp.content = this.data[index];
+    this.cartComp.render();
+    storage.setStorage(this.cartComp.content);
   }
   renderFooterComp(index) {
     const footerComp = document.querySelector("footer-comp");
