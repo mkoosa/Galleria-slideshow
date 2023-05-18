@@ -1,5 +1,5 @@
 let sound = new Howl({
-    src: ['/tools/Disco.3000.Vol.8.mp3'],
+    src: ['../tools/Disco (mp3cut.net).mp3'],
     volume:0.7,
     html5: true,
 });
