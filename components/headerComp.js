@@ -1,5 +1,5 @@
 import storage from "../tools/Storage.js";
-
+import { stopMusic } from "../tools/howler.js";
 class Header extends HTMLElement {
   constructor() {
     super();
@@ -21,6 +21,7 @@ class Header extends HTMLElement {
   }
 
   backToGalleria(galleria) {
+    stopMusic();
     storage.clearStorage();
     document.querySelector("cart-comp")
     ? this.displayGalleria(galleria)
