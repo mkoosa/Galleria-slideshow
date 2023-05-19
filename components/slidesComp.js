@@ -7,7 +7,7 @@ class Slides extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     const template = document.createElement("template");
     shadowRoot.appendChild(template.content.cloneNode(true));
-    shadowRoot.innerHTML = `<link rel="stylesheet" href="/styles/style.css">`;
+    shadowRoot.innerHTML = `<link rel="stylesheet" href="styles/style.css">`;
     this.wrapper = document.querySelector(".wrapper");
   }
 

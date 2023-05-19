@@ -17,7 +17,7 @@ class Cart extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <section class="galleria">
      <div class="picture">
       <div class="picture__container">

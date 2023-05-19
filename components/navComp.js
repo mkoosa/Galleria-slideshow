@@ -29,10 +29,10 @@ class Nav extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <div class="footer__right d-row">
-    <img class="back" src="/assets//shared/icon-back-button.svg" alt="back" tabindex="0">
-    <img class="forward" src="/assets//shared/icon-next-button.svg" alt="forward" tabindex="0">
+    <img class="back" src="assets/shared/icon-back-button.svg" alt="back" tabindex="0">
+    <img class="forward" src="assets/shared/icon-next-button.svg" alt="forward" tabindex="0">
     </div
     `;
 

@@ -11,8 +11,8 @@ class Header extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/styles/style.css">
-            <img class="header__logo" src="/assets/shared/logo.svg" alt="logo">
+            <link rel="stylesheet" href="styles/style.css">
+            <img class="header__logo" src="assets/shared/logo.svg" alt="logo">
             <slideshow-comp></slideshow-comp>
             `;
 

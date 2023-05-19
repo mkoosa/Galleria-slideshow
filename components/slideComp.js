@@ -4,7 +4,6 @@ class Slide extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     const template = document.createElement("template");
     shadowRoot.appendChild(template.content.cloneNode(true));
-    // console.log(document.querySelector('slides-comp'));
     this.slidesComp = document.querySelector('slides-comp')
   }
 
@@ -18,7 +17,7 @@ class Slide extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <img class="slide__img" src="${this._content.images.thumbnail}" alt="${this._content.name}">
     <div class="slide__description">
     <h3 class="slide__title">${this._content.name}</h3>

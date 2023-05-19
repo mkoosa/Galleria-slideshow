@@ -16,7 +16,7 @@ class Footer extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="styles/style.css">
         <footer class="footer">
         <div class="footer__content">
         <div class="footer__left">

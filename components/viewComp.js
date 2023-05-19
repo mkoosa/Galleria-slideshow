@@ -19,7 +19,7 @@ class View extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/styles/style.css">
+            <link rel="stylesheet" href="styles/style.css">
             <div class="picture__view d-row">
             <img src="/assets/shared/icon-view-image.svg">
             <p class="view-paragraph">view image</p>

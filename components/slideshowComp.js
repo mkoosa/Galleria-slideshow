@@ -26,7 +26,7 @@ class Slideshow extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="/styles/style.css">
+                <link rel="stylesheet" href="styles/style.css">
                 <p class="header__paragraph header__paragraph--start-stop" tabindex="0">${this._content}</p>
                 `;
     this.addEventListener("click", () => {
