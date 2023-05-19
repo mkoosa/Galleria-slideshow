@@ -18,7 +18,7 @@ class Slide extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.innerHTML = `
     <link rel="stylesheet" href="styles/style.css">
-    <img class="slide__img" src="${this._content.images.thumbnail}" alt="${this._content.name}">
+    <img class="slide__img" src=".${this._content.images.thumbnail}" alt="${this._content.name}">
     <div class="slide__description">
     <h3 class="slide__title">${this._content.name}</h3>
     <p class="slide__painter">${this._content.artist.name}</p>

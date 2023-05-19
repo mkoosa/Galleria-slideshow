@@ -22,8 +22,8 @@ class Cart extends HTMLElement {
      <div class="picture">
       <div class="picture__container">
       <picture>
-       <source class="image-large" media="(min-width:768px)" srcset=${this._content.images.hero.large}>
-       <img class="image-medium" alt="" srcset=${this._content.images.hero.small}>
+       <source class="image-large" media="(min-width:768px)" srcset=.${this._content.images.hero.large}>
+       <img class="image-medium" alt="" srcset=.${this._content.images.hero.small}>
      </picture>
     <view-comp></view-comp>
      </div>
