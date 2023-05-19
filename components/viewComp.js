@@ -63,7 +63,7 @@ class View extends HTMLElement {
       <i class="fas fa-solid fa-xmark"></i>
       <picture>
       <source class="image-large" media="(min-width:600px)" srcset=${data.images.gallery}>
-      <img class="image-medium" alt="" srcset=.${data.images.thumbnail}>
+      <img class="image-medium" alt="" srcset=${data.images.thumbnail}>
        </picture>
       </div>
       `;
