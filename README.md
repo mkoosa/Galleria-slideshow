@@ -1,30 +1,23 @@
-# Frontend Mentor - Galleria slideshow site solution
+# Galleria slideshow
 
-This is a solution to the [Galleria slideshow site challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/galleria-slideshow-site-tEA4pwsa6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+This is a solution to the [Galleria slideshow site challenge on Frontend Mentor]<https://www.frontendmentor.io/challenges/galleria-slideshow-site-tEA4pwsa6>
 
-## Table of contents
+## Installation
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+1.Clone repository to VSCode
+2.Open the app by using live server
+3.You can open directly <https://mkoosa.github.io/galleria-slideshow/>.
 
 ## Overview
 
-### The challenge
-
-Users should be able to:
+Users is able to:
 
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
 - Navigate the slideshow and view each painting in a lightbox
-- Stop and play show any time withouth loosing data after browser refreshing 
-
+- Stop and play show any time
+- Not to loose data after browser refreshing
+  
 ### Built with
 
 - Semantic HTML5 markup
@@ -36,13 +29,16 @@ Users should be able to:
 - Mobile-first workflow
 - [HOWLER.JS](https://howlerjs.com/) - JS library
 
-
 ### What I learned
 
-- buiild SPA by using custom elements
-- keep the state by using sesion storage
+- built SPA by using custom elements without using framework
+- keep the state by using session storage
+- mobile first workflow
+- how module work and communicate witch each other
+- how store, reuse and get data from local storage
+- how build and implements classes
+- ti improve OPP skills
 
-## Author
-- Frontend Mentor - [@mkoosa](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusern
+## Developer
 
+KoOsa
