@@ -1,8 +1,5 @@
-# Galleria slideshow
 
-This is a solution to the [Galleria slideshow site challenge on Frontend Mentor]<https://www.frontendmentor.io/challenges/galleria-slideshow-site-tEA4pwsa6>
-
-## Installation
+# Installation
 
 1.Clone repository to VSCode
 2.Open the app by using live server
@@ -41,4 +38,5 @@ Users is able to:
 
 ## Developer
 
+This is a solution to the [Galleria slideshow site challenge on Frontend Mentor]
 KoOsa
